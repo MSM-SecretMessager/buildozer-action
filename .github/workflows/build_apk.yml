@@ -1,0 +1,19 @@
+name: Build APK
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build APK with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          buildozer_spec: buildozer.spec
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: APK
+          path: bin/*.apk
